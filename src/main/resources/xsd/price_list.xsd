@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schema targetNamespace="urn:com:internetx:ns:price_list-1.0"
+	xmlns:priceList="urn:com:internetx:ns:price_list-1.0" xmlns="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+
+	<element name="priceList" type="priceList:priceListType" />
+
+	<complexType name="priceListType">
+		<sequence>
+			<element name="prices" type="priceList:prices" minOccurs="1"
+				maxOccurs="1" />
+			<element name="promos" type="priceList:prices" minOccurs="1"
+				maxOccurs="1" />
+			<element name="comment" type="priceList:commentType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="generated" type="dateTime" use="required" />
+		<attribute name="customer" type="string" use="required" />
+	</complexType>
+
+	<complexType name="prices">
+		<sequence>
+			<element name="domain" type="priceList:articleType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<element name="domain_trustee" type="priceList:articleType"
+				minOccurs="0" maxOccurs="unbounded" />
+			<element name="domain_premium" type="priceList:articleType"
+				minOccurs="0" maxOccurs="unbounded" />
+
+			<element name="certificates" type="priceList:articleType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="articleType">
+		<sequence>
+			<element name="businessCase" type="priceList:businessCaseType"
+				minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="label" type="string" use="required" />
+	</complexType>
+
+	<complexType name="businessCaseType">
+		<sequence>
+			<element name="price" type="priceList:price" minOccurs="1"
+				maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="label" type="string" use="required" />
+	</complexType>
+
+
+	<complexType name="price">
+		<sequence>
+			<element name="runtimeTakeOver" minOccurs="0" maxOccurs="1" />
+			<element name="grandfather" minOccurs="0" maxOccurs="1" />
+			<element name="idn" minOccurs="0" maxOccurs="1" />
+			<element name="registrarAutoDNS" minOccurs="0" maxOccurs="1" />
+			<element name="inclusive" minOccurs="0" maxOccurs="1"
+				type="priceList:inclusiveType" />
+			<element name="validity" type="priceList:validityType"
+				minOccurs="0" maxOccurs="1" />
+			<element name="regular" type="priceList:price" minOccurs="0"
+				maxOccurs="1" />
+		</sequence>
+		<attribute name="type" type="priceList:priceType" default="NET" />
+		<!-- vat rate in percent -->
+		<attribute name="vatRate" type="float" default="19.0" />
+		<attribute name="currency" type="priceList:currencyType"
+			default="EUR" />
+		<attribute name="amount" type="double" use="required" />
+		<attribute name="period" type="priceList:periodType" use="optional" />
+
+	</complexType>
+
+	<complexType name="commentType">
+		<simpleContent>
+			<extension base="normalizedString">
+				<attribute name="lang" type="language" default="en" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+
+	<complexType name="validityType">
+		<attribute name="from" type="dateTime" use="optional" />
+		<attribute name="until" type="dateTime" use="optional" />
+	</complexType>
+
+	<complexType name="inclusiveType">
+		<attribute name="count" type="int" use="required" />
+	</complexType>
+
+	<simpleType name="priceType">
+		<restriction base="string">
+			<enumeration value="NET" />
+			<enumeration value="GROSS" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="currencyType">
+		<restriction base="string">
+			<pattern value="[A-Z]{3}" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="periodType">
+		<restriction base="string">
+			<pattern value="[1-9]{1,2}[d,m,q,y]{1}" />
+		</restriction>
+	</simpleType>
+
+</schema>
+

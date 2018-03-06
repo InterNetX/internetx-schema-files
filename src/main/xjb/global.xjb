@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="2.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:namespace="http://jaxb2-commons.dev.java.net/namespace-prefix"
+	xmlns:priceList="urn:com:internetx:ns:price_list-1.0"
+	jaxb:extensionBindingPrefixes="xjc">
+	<jaxb:globalBindings>
+		<xjc:simple />
+		<xjc:serializable uid="-1" />
+		<xjc:javaType name="java.util.Date" xmlType="xs:dateTime"
+			adapter="org.domainrobot.adapter.RFCDateTimeAdapter" />
+		<xjc:javaType name="java.util.Date" xmlType="xs:date"
+			adapter="org.domainrobot.adapter.RFCDateAdapter" />
+		<xjc:javaType name="java.util.Locale" xmlType="xs:language"
+			adapter="org.domainrobot.adapter.LocaleLanguageAdapter" />
+		<xjc:javaType name="java.lang.Boolean" xmlType="xs:boolean"
+			adapter="org.domainrobot.adapter.BooleanAdapter" />
+			<xjc:javaType name="java.util.Currency" xmlType="priceList:currencyType"
+			adapter="com.internetx.adapter.CurrencyAdapter" />
+	</jaxb:globalBindings>
+
+	<jaxb:bindings schemaLocation="../resources/xsd/price_list.xsd">
+
+		<jaxb:bindings>
+			<namespace:prefix name="" />
+		</jaxb:bindings>
+	</jaxb:bindings>
+
+
+	
+</jaxb:bindings>
