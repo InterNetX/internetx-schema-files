@@ -105,7 +105,7 @@
 
 	<simpleType name="periodType">
 		<restriction base="string">
-			<pattern value="[1-9]{1,2}[d,m,q,y]{1}" />
+			<pattern value="[0-9]{1,2}[dmqy]{1}" />
 		</restriction>
 	</simpleType>
 
