@@ -19,7 +19,7 @@ public class RFCDateTimeAdapter extends XmlAdapter<String, Date> {
 	private final Object lock = new Object();
 
 	public RFCDateTimeAdapter() {
-		df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
 	}
 
 	@Override
